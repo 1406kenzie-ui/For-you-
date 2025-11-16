@@ -1,188 +1,336 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Poem & Confession</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { width: 100%; height: 100%; overflow: hidden; font-family: 'Poppins', sans-serif; }.page {
-        position: absolute; width: 100%; height: 100%; display: flex;
-        justify-content: center; align-items: center; flex-direction: column;
-        background-size: cover; background-position: center;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Love Pages</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
     }
-    .hidden { display: none; }
+
+    body,html{
+        width:100%;
+        height:100%;
+        overflow:hidden;
+        font-family: "Poppins", sans-serif;
+    }
+
+    /* PAGE WRAPPER */
+    .page{
+        position:absolute;
+        top:0; left:0;
+        width:100%; height:100%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+        background-size:cover;
+        background-position:center;
+        background-repeat:no-repeat;
+        transition:opacity .6s ease;
+    }
+
+    /* HIDDEN */
+    .hidden{
+        opacity:0;
+        pointer-events:none;
+    }
 
     /* BUTTON STYLE */
-    .btn {
-        padding: 18px 40px;
-        font-size: 28px;
-        border-radius: 35px;
-        border: none;
-        backdrop-filter: blur(10px);
-        background: rgba(0,0,0,0.5);
-        color: white;
-        cursor: pointer;
-        transition: 0.3s;
+    button{
+        padding:12px 28px;
+        font-size:20px;
+        border:none;
+        border-radius:12px;
+        cursor:pointer;
+        font-weight:600;
+        background:rgba(0,0,0,0.55);
+        color:white;
+        backdrop-filter:blur(6px);
+        transition:0.3s;
     }
-    .btn:hover { transform: scale(1.08); }
-
-    /* POEM BOX */
-    .poem-box {
-        max-width: 80%; padding: 30px;
-        background: rgba(0,0,0,0.45);
-        backdrop-filter: blur(8px);
-        border-radius: 25px;
-        color: white;
-        font-size: 22px;
-        text-align: center;
+    button:hover{
+        transform:scale(1.05);
     }
 
-    /* QUESTION BOX */
-    .question-box {
-        background: rgba(0,0,0,0.45);
-        padding: 35px; border-radius: 20px;
-        backdrop-filter: blur(10px);
-        color: white; text-align: center;
-        max-width: 85%; font-size: 26px;
+    /* POEM CONTAINER */
+    .container-poem{
+        width:92%;
+        max-width:750px;
+        max-height:85vh;    /* ⭐ scroll fix */
+        overflow-y:auto;    /* ⭐ allow scroll */
+        background:rgba(0,0,0,0.45);
+        backdrop-filter:blur(10px);
+        padding:28px;
+        padding-bottom:40px;
+        border-radius:25px;
+        color:white;
+        line-height:1.55;
+        z-index:10;
     }
 
-    .choice-btn {
-        margin-top: 25px;
-        padding: 15px 35px;
-        font-size: 22px;
-        border-radius: 25px;
-        border: none;
-        cursor: pointer;
-        background: white;
+    /* SCROLLBAR */
+    .container-poem::-webkit-scrollbar{
+        width:8px;
+    }
+    .container-poem::-webkit-scrollbar-thumb{
+        background:rgba(255,255,255,0.4);
+        border-radius:10px;
     }
 
-    /* Fireflies */
-    #firefly-container {
-        position: absolute; width: 100%; height: 100%; top:0; left:0; pointer-events:none;
+    /* FIREFLIES */
+    .firefly{
+        position:absolute;
+        width:6px;
+        height:6px;
+        background:white;
+        border-radius:50%;
+        opacity:0.8;
+        animation:fly 8s infinite ease-in-out;
     }
-    .firefly {
-        position: absolute;
-        width: 8px; height: 8px;
-        background: rgba(255,255,150,0.8);
-        border-radius: 50%;
-        animation: fly 7s infinite ease-in-out;
-        box-shadow: 0 0 10px 4px rgba(255,255,150,0.8);
-    }
-    @keyframes fly {
-        0% { transform: translate(0,0); opacity: 0.4; }
-        50% { opacity: 1; }
-        100% { transform: translate(40px, -60px); opacity: 0.3; }
+    @keyframes fly{
+        0%{ transform:translate(0,0) scale(1); opacity:0.3; }
+        50%{ transform:translate(80px,-120px) scale(1.8); opacity:1; }
+        100%{ transform:translate(-60px,100px) scale(1); opacity:0.4; }
     }
 
 </style>
+</head>
+<body>
 
-</head><body><!-- PAGE 1 -->
+<!-- AUDIO -->
+<audio id="lagu1" src="lagu1.mp3"></audio>
+<audio id="lagu2" src="lagu2.mp3"></audio>
+
+<!-- PAGE 1 -->
 <div id="page1" class="page" style="background-image:url('halaman1.jpg');">
-    <button class="btn" onclick="goToPage2()">sorry for you</button>
+<button onclick="goToPage(2); playLagu1();">Sorry for you!</button>
+
 </div>
 
-<!-- PAGE 2 (POEM) -->
+<!-- PAGE 2 -->
 <div id="page2" class="page hidden" style="background-image:url('halaman2.jpg');">
-    <div id="firefly-container"></div>
-    <div class="poem-box">
-        <h2 style="margin-bottom: 20px; font-size: 30px;">Jeda Cinta</h2>
+
+
+    <!-- FIREFLIES FULL PAGE -->
+    <div id="fireflies2"></div>
+
+    <div class="container-poem">
+        <h2 style="text-align:center; margin-bottom:15px;">Jeda Cinta</h2>
         <p>
+        Ada hari ketika kabut turun terlalu
+        cepat,
+        bukan di bukit atau jalan lengang,
+        tapi di dadaku sendiri—
+        tempat di mana langkahku tiba-tiba
+        ragu
+        dan suara dunia terdengar seperti
+        bisikan yang lupa arah pulang. 
+        <br><br>
+        
+        Tenang yang dulu kau titipkan
+        tak hilang, sebenarnya.
+        Aku hanya gagal merawatnya,
+        membiarkannya tercecer seperti
+        kertas catatan
+        yang basah oleh hujan sore.
+        <br><br>
+ 
+        Di antara jeda yang mestinya ramah
+        bagi kita berdua,
+        aku mengucap sesuatu
+        yang bahkan kini malu kuingat.
+        Bukan kalimat besar,
+        hanya nada kecil
+        yang entah bagaimana berubah jadi
+        duri.
+        Kau menunduk—
+        bukan karena kalah,
+        tapi karena mencoba menyelamatkan
+        yang tersisa dari hatimu sendiri.
+        <br><br>
+        Diammu setelah itu
+bukan dinding,
+melainkan taman yang tak berani kuketuk.
+Aku melihatmu dari jauh—
+dari jarak yang dibuat oleh kesalahanku,
+dari ruang yang pernah menjadi
+tempat kau menyimpan tawa paling ringan. 
+        <br><br>
+        Tangismu…
+aku tak mendengarnya,
+tapi aku melihat pipimu lembap
+dan tahu itu bukan hujan sore.
+Ada rasa bersalah yang tumbuh
+seperti benih yang tak sengaja kutanam
+di tanah yang mestinya kita rawat bersama.
+  
+        <br><br>
+Dan yang paling menyakitkan—
+kau tetap cantik dalam sedihmu.
+Tak dramatis,
+tak seperti kisah film,
+hanya manusia yang menahan luka dengan cara sederhana:
+menghela napas perlahan,
+menatap lantai,
+lalu tersenyum kecil
+seolah ingin bilang bahwa semuanya masih baik-baik saja.<br><br>
 
-Ada hari ketika kabut turun terlalu cepat
-,<br> bukan di bukit atau jalan lengang,<br>
-tapi di dadaku sendiri—<br> tempat di mana
-langkahku tiba-tiba ragu<br> dan suara dunia
-terdengar seperti bisikan yang lupa arah
-pulang.<br><br>
+Aku pernah pergi,
+bodohnya tanpa pamit.
+Kupikir waktu bisa merapikan semuanya,
+padahal ia hanya menumpuk jarak
+seperti buku-buku yang tidak pernah kukembalikan ke raknya.<br><br>
 
-Tenang yang dulu kau titipkan<br> tak hilang, sebenarnya.<br> Aku hanya gagal merawatnya,<br> membiarkannya tercecer seperti kertas catatan<br> yang basah oleh hujan sore.<br><br>
+Kesalahan yang sama muncul lagi,
+dan kau—entah bagaimana—
+masih memberiku tempat di dekatmu.
+Aku tak mengerti bagaimana hatimu bekerja,
+tapi aku tahu aku harus belajar
+agar tak lagi merusak apa yang kau sisakan.
+<br><br>
 
-Di antara jeda yang mestinya ramah bagi kita berdua,<br> aku mengucap sesuatu<br> yang bahkan kini malu kuingat.<br> Bukan kalimat besar,<br> hanya nada kecil<br> yang entah bagaimana berubah jadi duri.<br> Kau menunduk—<br> bukan karena kalah,<br> tapi karena mencoba menyelamatkan<br> yang tersisa dari hatimu sendiri.<br><br>
+Kini, ketika kau diam,
+aku belajar membaca bentuk alis,
+cara kau menarik napas,
+dan getar kecil di tanganmu—
+tanda bahwa ada hal yang ingin kau katakan
+namun memilih tak diucapkan.<br><br>
 
-Diammu setelah itu<br> bukan dinding,<br> melainkan taman yang tak berani kuketuk.<br> Aku melihatmu dari jauh—<br> dari jarak yang dibuat oleh kesalahanku,<br> dari ruang yang pernah menjadi<br> tempat kau menyimpan tawa paling ringan.<br><br>
+Matamu…
+bukan tentang cahaya,
+bukan tentang metafora yang sering kubaca di buku,
+tapi tentang bagaimana mereka menatapku—
+pelan, jujur,
+dan masih memberi ruang
+meski aku sering terjatuh oleh kesalahan sendiri.
+<br><br>
 
-Tangismu…<br> aku tak mendengarnya,<br> tapi aku melihat pipimu lembap<br> dan tahu itu bukan hujan sore.<br> Ada rasa bersalah yang tumbuh<br> seperti benih yang tak sengaja kutanam<br> di tanah yang mestinya kita rawat bersama.<br><br>
+Dan di akhir semua ini,
+aku hanya ingin berkata:
+maaf yang tak lagi berupa kata,
+melainkan langkah baru
+yang kutata satu per satu
+agar tak lagi menggores bahagiamu.
+Sebab kehadiranmu,
+adalah puisi yang bahkan waktu pun
+tak sanggup menghapusnya.<br><br>
 
-Dan yang paling menyakitkan—<br> kau tetap cantik dalam sedihmu.<br> Tak dramatis,<br> tak seperti kisah film,<br> hanya manusia yang menahan luka dengan cara sederhana:<br> menghela napas perlahan,<br> menatap lantai,<br> lalu tersenyum kecil<br> seolah ingin bilang bahwa semuanya masih baik-baik saja.<br><br>
 
-Aku pernah pergi,<br> bodohnya tanpa pamit.<br> Kupikir waktu bisa merapikan semuanya,<br> padahal ia hanya menumpuk jarak<br> seperti buku-buku yang tidak pernah kukembalikan ke raknya.<br><br>
+        </p>
+    </div>
 
-Kesalahan yang sama muncul lagi,<br> dan kau—entah bagaimana—<br> masih memberiku tempat di dekatmu.<br> Aku tak mengerti bagaimana hatimu bekerja,<br> tapi aku tahu aku harus belajar<br> agar tak lagi merusak apa yang kau sisakan.<br><br>
+    <br>
+   <button onclick="stopLagu1(); goToPage(3); playLagu2();">Next</button>
+</div>
 
-Kini, ketika kau diam,<br> aku belajar membaca bentuk alis,<br> cara kau menarik napas,<br> dan getar kecil di tanganmu—<br> tanda bahwa ada hal yang ingin kau katakan<br> namun memilih tak diucapkan.<br><br>
-
-Matamu…<br> bukan tentang cahaya,<br> bukan tentang metafora yang sering kubaca di buku,<br> tapi tentang bagaimana mereka menatapku—<br> pelan, jujur,<br> dan masih memberi ruang<br> meski aku sering terjatuh oleh kesalahan sendiri.<br><br>
-
-Dan di akhir semua ini,<br> aku hanya ingin berkata:<br> maaf yang tak lagi berupa kata,<br> melainkan langkah baru<br> yang kutata satu per satu<br> agar tak lagi menggores bahagiamu.<br> Sebab kehadiranmu,<br> adalah puisi yang bahkan waktu pun<br> tak sanggup menghapusnya.
-
-</p>
-        </div>
-        <button class="btn" style="margin-top:40px;" onclick="goToPage3()">Next</button>
-    </div><!-- PAGE 3 QUESTION -->
+<!-- PAGE 3 (YES/NO QUESTION) -->
 <div id="page3" class="page hidden" style="background-image:url('halaman2.jpg');">
-    <div class="question-box">
-        Would you like to be my girlfriend?
+    
+    <!-- FIREFLIES -->
+    <div id="fireflies3"></div>
+
+    <div class="container-poem" style="text-align:center; font-size:22px;">
+        <p>Do you want to be my girlfriend?</p>
         <br>
-        <button class="choice-btn" onclick="answerYes()">Yes</button>
-        <button class="choice-btn" onclick="answerNo()">No</button>
+<button onclick="stopLagu2(); goToPage(4);">No</button>
+        <button onclick="goToPage(5);">Yes</button>
     </div>
 </div>
 
-<!-- PAGE 4 NO -->
-<div id="page4_no" class="page hidden" style="background:black;"></div>
-
-<!-- PAGE 4 YES -->
-<div id="page4_yes" class="page hidden" style="background-image:url('halaman1.jpg');">
-    <div class="poem-box" style="font-size:32px;">Screenshot this and send to me ❤️</div>
+<!-- PAGE 4 - NO -->
+<div id="pageNo" class="page hidden" style="background:black;">
+    <p style="color:white; font-size:28px;">...</p>
 </div>
 
+<!-- PAGE 4 - YES -->
+<div id="pageYes" class="page hidden" style="background-image:url('halaman1.jpg');">
+    
+    <!-- FIREFLIES -->
+    <div id="fireflies4"></div>
+
+    <div class="container-poem" style="text-align:center;">
+        <h2>Screenshot this and send to me ❤️</h2>
+    </div>
+</div>
+
+
 <script>
-/* ================= MUSIC ================== */
-let sadMusic = new Audio("lagu1.mp3");
-let loveMusic = new Audio("lagu2.mp3");
-sadMusic.loop = true; loveMusic.loop = true;
-
-function playFixed(audio){ audio.play().catch(()=>{ setTimeout(()=>audio.play(),200); }); }
-
-/* ================= FIREFLIES ================== */
-function generateFireflies(){
-    const c = document.getElementById("firefly-container");
-    for(let i=0;i<25;i++){
+/* FIREFLIES FUNCTION */
+function generateFireflies(targetId, count=25){
+    const area = document.getElementById(targetId);
+    for(let i=0;i<count;i++){
         let f = document.createElement("div");
-        f.classList.add("firefly");
-        f.style.left = Math.random()*100+"vw";
-        f.style.top = Math.random()*100+"vh";
-        f.style.animationDuration = (5+Math.random()*5)+"s";
-        c.appendChild(f);
+        f.className = "firefly";
+        f.style.left = Math.random()*100 + "%";
+        f.style.top = Math.random()*100 + "%";
+        f.style.animationDelay = (Math.random()*5)+"s";
+        area.appendChild(f);
     }
 }
-generateFireflies();
+generateFireflies("fireflies2", 30);
+generateFireflies("fireflies3", 30);
+generateFireflies("fireflies4", 30);
 
-/* ================= PAGE SWITCH ================== */
+/* PAGE SWITCH */
+function show(p){
+    document.querySelectorAll(".page").forEach(pg=>pg.classList.add("hidden"));
+    document.getElementById(p).classList.remove("hidden");
+}
+
+/* BUTTON ACTIONS */
 function goToPage2(){
-    document.getElementById("page1").classList.add("hidden");
-    document.getElementById("page2").classList.remove("hidden");
-    playFixed(lagu1);
+    show("page2");
+    document.getElementById("lagu1").play();
 }
 
 function goToPage3(){
+    show("page3");
+    document.getElementById("lagu1").pause();
+    document.getElementById("lagu2").play();
+}
+
+function jawabNo(){
+    show("pageNo");
+    document.getElementById("lagu2").pause();
+}
+
+function jawabYes(){
+    show("pageYes");
+    document.getElementById("lagu2").play();
+}
+
+<script>
+function playLagu1() {
+    const lagu1 = document.getElementById("lagu1");
+    lagu1.volume = 1.0;
+    lagu1.play().catch(e => console.log("Autoplay dicegah browser:", e));
+}
+
+function stopLagu1() {
+    const lagu1 = document.getElementById("lagu1");
     lagu1.pause();
-    lagu2.currentTime = 0;
-    playFixed(lagu2);
-
-    document.getElementById("page2").classList.add("hidden");
-    document.getElementById("page3").classList.remove("hidden");
+    lagu1.currentTime = 0;
 }
 
-function answerNo(){
+function playLagu2() {
+    const lagu2 = document.getElementById("lagu2");
+    lagu2.volume = 1.0;
+    lagu2.play().catch(e => console.log("Autoplay dicegah browser:", e));
+}
+
+function stopLagu2() {
+    const lagu2 = document.getElementById("lagu2");
     lagu2.pause();
-    document.getElementById("page3").classList.add("hidden");
-    document.getElementById("page4_no").classList.remove("hidden");
+    lagu2.currentTime = 0;
 }
+</script>
 
-function answerYes(){
-    document.getElementById("page3").classList.add("hidden");
-    document.getElementById("page4_yes").classList.remove("hidden");
-}
-</script></body>
+</script>
+
+</body>
 </html>
