@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For You</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* UNIVERSAL PAGE STYLE */
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.bg-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* --- Halaman 1 --- */
+.start-btn {
+    padding: 25px 40px;
+    font-size: 30px;
+    font-weight: 600;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    background: rgba(0,0,0,0.45);
+    color: white;
+    transition: 0.3s;
+}
+
+.start-btn:hover {
+    background: rgba(0,0,0,0.7);
+}
+
+/* --- Halaman 2 (puisi) --- */
+.container-poem {
+    position: relative;
+    width: 92%;
+    max-width: 750px;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(10px);
+    padding: 28px;
+    border-radius: 25px;
+    color: white;
+    text-align: left;
+    z-index: 10;
+    line-height: 1.55;
+}
+
+.container-poem h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 28px;
+}
+
+.next-btn {
+    margin-top: 20px;
+    padding: 14px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(5px);
+    cursor: pointer;
+    color: white;
+    transition: 0.3s;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.next-btn:hover {
+    background: rgba(255,255,255,0.4);
+}
+
+/* KUNANG-KUNANG */
+.firefly {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: yellow;
+    border-radius: 50%;
+    filter: blur(3px);
+    animation: fly 6s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes fly {
+    0% { transform: translateY(0) translateX(0); opacity: .4; }
+    25% { transform: translateY(-50px) translateX(30px); opacity: 1; }
+    50% { transform: translateY(20px) translateX(-20px); opacity: .5; }
+    75% { transform: translateY(-30px) translateX(10px); opacity: 1; }
+    100% { transform: translateY(0) translateX(0); opacity: .4; }
+}
+
+/* --- HALAMAN 3 --- */
+.question-box {
+    position: relative;
+    backdrop-filter: blur(10px);
+    background: rgba(0,0,0,0.35);
+    padding: 30px;
+    border-radius: 25px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    color: white;
+    z-index: 10;
+}
+
+.btn-choices {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn-choices button {
+    padding: 12px 28px;
+    font-size: 18px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    backdrop-filter: blur(5px);
+    background: rgba(255,255,255,0.2);
+    color: white;
+}
+
+.btn-choices button:hover {
+    background: rgba(255,255,255,0.35);
+}
+
+/* --- HALAMAN 4 YES --- */
+.yes-box {
+    position: relative;
+    backdrop-filter: blur(12px);
+    background: rgba(0,0,0,0.4);
+    padding: 40px;
+    border-radius: 25px;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    color: white;
+    z-index: 10;
+}
+
+.yes-box h1 {
+    font-size: 32px;
+}
+
+/* --- HALAMAN 4 NO --- */
+.center-msg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ---------------- HALAMAN 1 ---------------- -->
+<section id="page1" class="page">
+    <img src="halaman1.jpg" class="bg-img">
+    <button class="start-btn" onclick="goToPage2()">Sorry for you!</button>
+</section>
+
+<!-- ---------------- HALAMAN 2 ---------------- -->
+<section id="page2" class="page hidden">
+    <img src="halaman2.jpg" class="bg-img">
+
+    <div class="container-poem">
+        <h2>Jeda Cinta</h2>
+
+        <p>
+        Ada hari ketika kabut turun terlalu cepat, bukan di bukit atau jalan lengang,  
+        tapi di dadaku sendiri—tempat di mana langkahku tiba-tiba ragu dan suara dunia  
+        terdengar seperti bisikan yang lupa arah pulang.<br><br>
+
+        Tenang yang dulu kau titipkan tak hilang, sebenarnya.  
+        Aku hanya gagal merawatnya, membiarkannya tercecer seperti kertas catatan  
+        yang basah oleh hujan sore.<br><br>
+
+        Di antara jeda yang mestinya ramah bagi kita berdua,  
+        aku mengucap sesuatu yang bahkan kini malu kuingat.  
+        Bukan kalimat besar, hanya nada kecil yang entah bagaimana  
+        berubah jadi duri. Kau menunduk—bukan karena kalah,  
+        tapi karena mencoba menyelamatkan yang tersisa dari hatimu sendiri.<br><br>
+
+        Diammu setelah itu bukan dinding, melainkan taman yang tak berani kuketuk.  
+        Aku melihatmu dari jauh—dari jarak yang dibuat oleh kesalahanku,  
+        dari ruang yang pernah menjadi tempat kau menyimpan tawa paling ringan.<br><br>
+
+        Tangismu… aku tak mendengarnya, tapi aku melihat pipimu lembap  
+        dan tahu itu bukan hujan sore. Ada rasa bersalah yang tumbuh  
+        seperti benih yang tak sengaja kutanam di tanah  
+        yang mestinya kita rawat bersama.<br><br>
+
+        Dan yang paling menyakitkan—kau tetap cantik dalam sedihmu.  
+        Tak dramatis, tak seperti kisah film, hanya manusia yang menahan luka  
+        dengan cara sederhana: menghela napas perlahan, menatap lantai,  
+        lalu tersenyum kecil seolah ingin bilang bahwa semuanya  
+        masih baik-baik saja.<br><br>
+
+        Aku pernah pergi, bodohnya tanpa pamit. Kupikir waktu bisa merapikan semuanya,  
+        padahal ia hanya menumpuk jarak seperti buku-buku  
+        yang tidak pernah kukembalikan ke raknya.<br><br>
+
+        Kesalahan yang sama muncul lagi, dan kau—entah bagaimana—  
+        masih memberiku tempat di dekatmu. Aku tak mengerti bagaimana hatimu bekerja,  
+        tapi aku tahu aku harus belajar agar tak lagi merusak apa yang kau sisakan.<br><br>
+
+        Kini, ketika kau diam, aku belajar membaca bentuk alis,  
+        cara kau menarik napas, dan getar kecil di tanganmu—  
+        tanda bahwa ada hal yang ingin kau katakan namun memilih tak diucapkan.<br><br>
+
+        Matamu… bukan tentang cahaya, bukan tentang metafora  
+        yang sering kubaca di buku, tapi tentang bagaimana mereka menatapku—  
+        pelan, jujur, dan masih memberi ruang  
+        meski aku sering terjatuh oleh kesalahan sendiri.<br><br>
+
+        Hari ini aku datang tanpa kalimat indah, tanpa upaya  
+        menyembunyikan penyesalan. Aku hanya ingin membetulkan langkah,  
+        satu per satu, agar tak lagi mengenai kaki atau hatimu.<br><br>
+
+        Dan di akhir semua ini, aku hanya ingin berkata:  
+        maaf yang tak lagi berupa kata, melainkan langkah baru  
+        yang kutata satu per satu agar tak lagi menggores bahagiamu.  
+        Sebab kehadiranmu, adalah puisi yang bahkan waktu pun  
+        tak sanggup menghapusnya.
+        </p>
+
+        <button class="next-btn" onclick="goToPage3()">Next</button>
+    </div>
+
+    <!-- Kunang-kunang -->
+    <div id="firefly-container"></div>
+</section>
+
+<!-- ---------------- HALAMAN 3 ---------------- -->
+<section id="page3" class="page hidden">
+    <img src="halaman2.jpg" class="bg-img">
+
+    <div class="question-box">
+        <h2>Do you want to be my girlfriend?</h2>
+
+        <div class="btn-choices">
+            <button onclick="answerYes()">Yes</button>
+            <button onclick="answerNo()">No</button>
+        </div>
+    </div>
+</section>
+
+<!-- ---------------- HALAMAN 4 NO ---------------- -->
+<section id="page4_no" class="page hidden" style="background:black;">
+    <div class="center-msg">
+        <h2 style="color:white; font-weight:300;">Alright... I understand.</h2>
+    </div>
+</section>
+
+<!-- ---------------- HALAMAN 4 YES ---------------- -->
+<section id="page4_yes" class="page hidden">
+    <img src="halaman2.jpg" class="bg-img">
+
+    <div class="yes-box">
+        <h1>Screenshot this and send to me</h1>
+    </div>
+</section>
+
+<script>
+/* ================= FIREFLIES ================== */
+function generateFireflies() {
+    const container = document.getElementById("firefly-container");
+    for (let i = 0; i < 25; i++) {
+        let f = document.createElement("div");
+        f.classList.add("firefly");
+        f.style.left = Math.random() * 100 + "vw";
+        f.style.top = Math.random() * 100 + "vh";
+        f.style.animationDuration = (5 + Math.random() * 5) + "s";
+        container.appendChild(f);
+    }
+}
+generateFireflies();
+
+/* ================= MUSIC ================== */
+let sadMusic = new Audio("lagu.mp3");
+sadMusic.loop = true;
+
+let loveMusic = new Audio("Lagu2.mp3");
+loveMusic.loop = true;
+
+/* ================= PAGE FUNCTIONS ================== */
+
+function goToPage2() {
+    document.getElementById("page1").classList.add("hidden");
+    document.getElementById("page2").classList.remove("hidden");
+
+    sadMusic.play().catch(()=>{});
+}
+
+function goToPage3() {
+    sadMusic.pause();
+    document.getElementById("page2").classList.add("hidden");
+    document.getElementById("page3").classList.remove("hidden");
+
+    loveMusic.play().catch(()=>{});
+}
+
+function answerNo() {
+    loveMusic.pause();
+    document.getElementById("page3").classList.add("hidden");
+    document.getElementById("page4_no").classList.remove("hidden");
+}
+
+function answerYes() {
+    document.getElementById("page3").classList.add("hidden");
+    document.getElementById("page4_yes").classList.remove("hidden");
+}
+
+</script>
+
+</body>
+</html>
+
+
